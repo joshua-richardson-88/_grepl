@@ -1,0 +1,108 @@
+import { useEffect, useRef, useState } from "react"
+import usePrevious from "../../hooks/usePrevious"
+import gameStore, { Position } from "./data/store"
+
+const isWithinTile = (a: Position, b: DOMRect): boolean => {
+  if (a.x == null || a.y == null) return false
+  return (
+    a.x >= b.x && a.x <= b.x + b.width && a.y >= b.y && a.y <= b.y + b.height
+  )
+}
+const getAdjStyles = (word: number[], n: number) => {
+  if (!word.includes(n)) return []
+
+  const index = word.indexOf(n)
+  const wordSegment = word.slice(index + 1, index + 2)
+
+  if (wordSegment.length < 1) return []
+
+  const adjacent = [
+    n % 4 === 0 || n < 4 ? -1 : n - 5,
+    n < 4 ? -1 : n - 4,
+    (n + 1) % 4 === 0 || n < 4 ? -1 : n - 3,
+    n % 4 === 0 ? -1 : n - 1,
+    (n + 1) % 4 === 0 ? -1 : n + 1,
+    n % 4 === 0 || n > 11 ? -1 : n + 3,
+    n > 11 ? -1 : n + 4,
+    (n + 1) % 4 === 0 || n > 11 ? -1 : n + 5,
+  ]
+
+  return adjacent
+    .map((i) => i > 0 && wordSegment.includes(i))
+    .map((x, i) => {
+      if (!x) return null
+      if (i === 0) return "tile_top_left"
+      if (i === 1) return "tile_top"
+      if (i === 2) return "tile_top_right"
+      if (i === 3) return "tile_left"
+      if (i === 4) return "tile_right"
+      if (i === 5) return "tile_bottom_left"
+      if (i === 6) return "tile_bottom"
+      if (i === 7) return "tile_bottom_right"
+    })
+    .filter((n) => n != null)
+}
+
+type Props = {
+  isAdjacent: boolean
+  letter: string
+  position: number
+  update: (n?: number) => void
+}
+const Cell = ({ isAdjacent, letter, position }: Props) => {
+  const tileRef = useRef<HTMLDivElement>(null)
+  const [withinTile, setWithinTile] = useState(false)
+  const wasWithinTile = usePrevious(withinTile)
+
+  const currentWord = gameStore().currentWord
+  const gameStarted = gameStore().gameStarted
+  const pointer = gameStore().pointer
+
+  const addLetter = gameStore().addLetter
+  const removeLetter = gameStore().removeLetter
+
+  const adjLineStyles = getAdjStyles(currentWord, position)
+
+  const handleClick = () => {
+    console.log("has letter already", currentWord.includes(position))
+    if (!gameStarted) return
+    if (currentWord.length === 0 || isAdjacent) addLetter(position)
+    if (currentWord.includes(position)) removeLetter(position)
+  }
+
+  useEffect(() => {
+    if (tileRef.current == null) return
+
+    setWithinTile(
+      isWithinTile(pointer, tileRef.current.getBoundingClientRect()),
+    )
+  }, [isWithinTile, pointer, tileRef])
+
+  useEffect(() => {
+    if (withinTile === wasWithinTile || !withinTile) return
+
+    handleClick()
+  }, [withinTile, wasWithinTile])
+
+  return (
+    <div className="gameTile" ref={tileRef}>
+      {adjLineStyles.map((e, i) => (
+        <div key={i} className={e ?? ""} />
+      ))}
+      <button
+        className={`${
+          currentWord.includes(position)
+            ? "selectedTile"
+            : isAdjacent
+            ? " adjacentTile"
+            : ""
+        }`}
+        onClick={handleClick}
+      >
+        {letter}
+      </button>
+    </div>
+  )
+}
+
+export default Cell
