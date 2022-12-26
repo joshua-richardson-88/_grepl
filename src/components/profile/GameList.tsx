@@ -56,7 +56,6 @@ const GameCard = ({ date, heatMap, tiles, type, words }: Game) => (
 
 const GameList = () => {
   const games = userStore().games
-  console.log(games)
 
   return (
     <div className="gameList">

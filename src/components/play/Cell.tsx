@@ -26,11 +26,6 @@ const getAdjStyles = (word: number[], n: number) => {
     n > 11 ? -1 : n + 4,
     (n + 1) % 4 === 0 || n > 11 ? -1 : n + 5,
   ]
-  console.log(
-    `position: ${n}\nadjacency: ${adjacent}\nin segment: ${adjacent.map((i) =>
-      wordSegment.includes(i),
-    )}`,
-  )
 
   return adjacent
     .map((i) => wordSegment.includes(i))

@@ -102,11 +102,6 @@ const gameStore = create<GameStore>()(
       removeLetter: (i) => {
         set(
           (state) => {
-            console.log(
-              "in removeLetter",
-              i,
-              state.currentWord.slice(i === 0 ? i : i - 1, -1),
-            )
             state.currentWord.splice(i)
           },
           false,
