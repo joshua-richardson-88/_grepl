@@ -188,11 +188,11 @@
   overflow-x: auto;
   padding: 0.5rem 0.5rem 0.5rem 0;
 }
-.word_list__container:first-child {
+.word-list__word:first-child {
   border-radius: 0.25rem;
   background-color: var(--clr-primary-500);
 }
-.wordList__word {
+.word-list__word {
   padding: 0.25rem 1rem;
   width: fit-content;
 }

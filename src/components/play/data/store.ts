@@ -30,7 +30,7 @@ const initState: State = {
   heatMap: _heatMap,
   pointer: _pointer,
   score: 0,
-  maxTime: 180,
+  maxTime: 1800,
   tileMap: {},
   tiles: _tiles,
   validationUrl: _url,

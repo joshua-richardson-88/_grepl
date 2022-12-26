@@ -5,10 +5,7 @@ const WordList = () => (
     <h3 className="word-list__title">Words Found</h3>
     <div className="word-list__container">
       {gameStore().wordList.map((w, i) => (
-        <p
-          key={i}
-          className={i === 0 ? "active wordList__word" : "wordList__word"}
-        >
+        <p key={i} className="word-list__word">
           {w}
         </p>
       ))}

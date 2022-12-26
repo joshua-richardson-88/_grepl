@@ -12,7 +12,18 @@ const getAdjStyles = (word: number[], n: number) => {
   if (!word.includes(n)) return []
 
   const index = word.indexOf(n)
-  const wordSegment = word.slice(index - 1, index + 2)
+  const wordSegment =
+    index === 0
+      ? word.slice(index, index + 2)
+      : word.slice(index - 1, index + 2)
+
+  console.log(`
+    position: ${n}
+    word: ${word}
+    
+    index in word: ${index}
+    word segment: ${wordSegment}
+  `)
 
   if (wordSegment.length < 1) return []
 
@@ -27,16 +38,24 @@ const getAdjStyles = (word: number[], n: number) => {
     (n + 1) % 4 === 0 || n > 11 ? -1 : n + 5,
   ]
 
-  return adjacent
-    .map((i) => wordSegment.includes(i))
-    .map((x, i) => {
-      if (!x) return null
-      if (i === 4) return "tile__adj--right"
-      if (i === 5) return "tile__adj--bottom-left"
-      if (i === 6) return "tile__adj--bottom"
-      if (i === 7) return "tile__adj--bottom-right"
-    })
-    .filter((n) => n != null)
+  const inWordSegment = adjacent.map((i) => wordSegment.includes(i))
+  const mapToClass = inWordSegment.map((x, i) => {
+    if (!x) return null
+    if (i === 4) return "tile__adj--right"
+    if (i === 5) return "tile__adj--bottom-left"
+    if (i === 6) return "tile__adj--bottom"
+    if (i === 7) return "tile__adj--bottom-right"
+  })
+  const filtered = mapToClass.filter(Boolean)
+
+  console.log(`
+    adjacent list: ${adjacent}
+    adjacent in word segment: ${inWordSegment}
+    adjacent to css class: ${mapToClass}
+    adjacent filtered: ${filtered}
+  `)
+
+  return filtered
 }
 
 type Props = {
