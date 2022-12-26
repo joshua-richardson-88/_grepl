@@ -92,6 +92,7 @@ const gameStore = create<GameStore>()(
             state.gameStarted = false
             state.tiles = _tiles
             state.tileMap = {}
+            state.currentWord = []
           },
           false,
           "game/endGame",

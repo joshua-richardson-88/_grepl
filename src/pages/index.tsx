@@ -12,11 +12,11 @@ const Home: NextPage = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Header />
-    <main className="wrapper">
-      <div className="full-bleed">
+    <main className="wrapper wrapper--gap">
+      <div className="wrapper__full-bleed">
         <TitleBoard />
       </div>
-      <article className="mt-12">
+      <article>
         <p className="text-center">
           <span className="text-large">Meet Grepl,</span> a classic word-finding
           game
@@ -26,7 +26,6 @@ const Home: NextPage = () => (
         </p>
       </article>
     </main>
-    <footer></footer>
   </>
 )
 

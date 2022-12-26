@@ -28,7 +28,7 @@ const Timer = ({ duration }: Props) => {
     return () => clearInterval(timer)
   }, [duration, endGame, isGameStarted, persistGame, t])
 
-  const textColor =
+  const timeIndicator =
     t < 0
       ? ""
       : t <= duration / 4
@@ -47,9 +47,11 @@ const Timer = ({ duration }: Props) => {
       : "--:--"
 
   return (
-    <div className="timer">
+    <div className="board__timer">
       <p>Time Left</p>
-      <p className={`text-large text-center${textColor}`}>{timeLeft}</p>
+      <p className="board__large-text" data-time={timeIndicator}>
+        {timeLeft}
+      </p>
     </div>
   )
 }

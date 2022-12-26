@@ -1,6 +1,5 @@
 import GameButton from "./GameButton"
 import Timer from "./Timer"
-import styles from "./index.module.css"
 import Score from "./Score"
 import RotateButton from "./RotateButton"
 import ClearButton from "./ClearButton"
@@ -12,7 +11,7 @@ const GameBoard = () => {
   return (
     <div className="board">
       <GameButton />
-      <Timer duration={180} />
+      <Timer duration={1800} />
       <Score />
       <RotateButton dir="cw" />
       <Game />

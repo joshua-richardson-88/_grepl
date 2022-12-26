@@ -7,6 +7,7 @@ const SubmitIcon = () => (
   <div role="status">
     <svg
       xmlns="http://www.w3.org/2000/svg"
+      className="board__icon"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={1.5}
@@ -25,7 +26,7 @@ const LoadingIcon = () => (
   <div role="status">
     <svg
       aria-hidden="true"
-      className="loading"
+      className="board__icon board__icon--loading"
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -45,6 +46,7 @@ const LoadingIcon = () => (
 
 const SubmitButton = () => {
   const [keyPressed, setKeyPressed] = useState(false)
+
   const list = gameStore().wordList
   const currentWord = gameStore().currentWord
   const tiles = gameStore().tiles
@@ -110,9 +112,10 @@ const SubmitButton = () => {
   return (
     <button
       name="submit word"
-      className={`insetShadow submitButton${keyPressed ? " active" : ""}`}
+      className="board__button board__button--tall"
       onClick={handleSubmit}
       type="submit"
+      data-pressed={keyPressed}
     >
       {isLoading ? <LoadingIcon /> : <SubmitIcon />}
     </button>

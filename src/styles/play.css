@@ -1,0 +1,198 @@
+.board {
+  --cell-size: 3rem;
+  display: grid;
+  grid-template-columns: repeat(6, var(--cell-size));
+  grid-template-rows: repeat(6, var(--cell-size));
+  place-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  color: var(--clr-text-primary);
+  touch-action: none;
+}
+.board__button {
+  border-radius: 0.25rem;
+  border: none;
+  outline: none;
+  display: grid;
+  place-content: center;
+  border-radius: 0.25rem;
+  background-color: linear-gradient(-45deg, hsl(0, 0%, 0%), hsl(0, 0%, 100%));
+  box-shadow: 3px 3px 4px 0 hsla(0, 0%, 0%, 0.25),
+    -2px -2px 3px 0 hsla(0, 0%, 100%, 0.3);
+}
+.board__button:is(:hover, :focus, :active, [data-pressed="true"]) {
+  box-shadow: inset 2px 2px 3px 0 hsla(0, 0%, 0%, 0.2),
+      inset -2px -2px 3px 0 hsla(0, 0%, 100%, 0.5);
+}
+.board__button[data-game-running="false"] {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.board__button--play {
+  background-color: var(--clr-activate);
+  color: var(--clr-text-activate);
+}
+.board__button--play:is(:hover, :focus, :active) {
+  --clr-activate: var(--clr-primary-600);
+}
+.board__button--tall, .board__button--clear {
+  cursor: pointer;
+  grid-row: span 2;
+  background-color: var(--clr-btn);
+  color: var(--clr-text-primary);
+}
+.board__button--clear {
+  background-color: var(--clr-clear);
+  color: var(--clr-text-primary);
+}
+
+.board__timer {
+  grid-column: span 4;
+  place-self: center;
+}
+.board__score { place-self: center; }
+
+.board__large-text[data-time="warning"] { color: var(--clr-text-warn); }
+.board__large-text[data-time="danger"] { color: var(--clr-text-danger); }
+
+.board__large-text {
+  text-align: center;
+  font-size: x-large;
+  font-weight: var(--fw-bold);
+}
+.board__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.board__icon--loading {
+  margin-right: 0.5rem;
+  animation: spin 1s linear infinite;
+  fill: var(--clr-activate);
+}
+
+.board__current-word {
+  grid-column: span 6;
+  background-color: var(--clr-btn);
+  border-radius: 0.25rem;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+.board__current-word[data-warn="true"] {
+  color: var(--clr-text-warn);
+}
+
+.gameboard {
+  grid-column: span 4;
+    grid-row: span 4;
+    display: grid;
+    grid-template-columns: repeat(4, var(--cell-size));
+    grid-template-rows: repeat(4, var(--cell-size));
+    place-content: center;
+    gap: 1rem;
+    overflow: hidden;
+    user-select: none;
+}
+.tile {
+  position: relative;
+  place-items: center;
+}
+.tile__adj {
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  background-color: green;
+}
+.tile__adj--right {
+  top: 50%;
+  right: -50%;
+  transform: translateY(-50%);
+}
+.tile__adj--bottom-left {
+  bottom: 0;
+  transform: translate(-50%, 50%) rotate(-45deg);
+}
+.tile__adj--bottom {
+  bottom: 0;
+  transform: rotate(90deg);
+}
+.tile__adj--bottom-right {
+  bottom: 0;
+  transform: translate(50%, 50%) rotate(45deg);
+}
+.tile__button-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 0.5rem;
+  background: linear-gradient(to bottom, var(--clr-from), var(--clr-to));
+}
+.tile__button-container[data-selected="adjacent"] {
+  --clr-from: var(--clr-slate-600);
+  --clr-to: var(--clr-slate-800);
+  --clr-tile: var(--clr-tile-adj);
+}
+.tile__button-container[data-selected="adjacent"]:is(:hover,:focus,:active) {
+  --clr-tile: var(--clr-tile-adj-on);
+}
+.tile__button-container[data-selected="selected"] {
+  --clr-from: var(--clr-primary-400);
+  --clr-to: var(--clr-primary-600);
+  --clr-tile: var(--clr-tile-selected);
+}
+.tile__button-container[data-selected="selected"]:is(:hover,:focus,:active) {
+  --clr-tile: var(--clr-tile-selected-on);
+  color: var(--clr-text-inverted);
+}
+.tile__button {
+  position: absolute;
+  top: 2.5%;
+  left: 2.5%;
+  border-radius: 50%;
+  width: 95%;
+  height: 95%;
+  background-color: var(--clr-tile);
+  outline: none;
+  border: none;
+  color: var(--clr-text-primary);
+  font-weight: var(--fw-bold);
+  font-size: x-large;
+  cursor: pointer;
+}
+.tile__button:is(:hover, :focus, :active) {
+  background-color: var(--clr-tile-on);
+  color: var(--clr-text-primary);
+}
+
+.word-list {
+  height: 10rem;
+  user-select: none;
+  padding: 0 1rem;
+}
+.word-list__title {
+  border-bottom: 1px solid var(--clr-neutral-100);
+  text-align: center;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.word-list__container {
+  display: flex;
+  height: 10rem;
+  width: 100%;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow-x: auto;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+}
+.word_list__container:first-child {
+  border-radius: 0.25rem;
+  background-color: var(--clr-primary-500);
+}
+.wordList__word {
+  padding: 0.25rem 1rem;
+  width: fit-content;
+}

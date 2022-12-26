@@ -81,7 +81,7 @@ const Game = () => {
   ])
 
   return (
-    <div className="game">
+    <div className="gameboard">
       {tiles.map((d, i) => (
         <Cell
           isAdjacent={adjacentCurrent.includes(i)}

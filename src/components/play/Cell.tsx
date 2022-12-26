@@ -12,7 +12,7 @@ const getAdjStyles = (word: number[], n: number) => {
   if (!word.includes(n)) return []
 
   const index = word.indexOf(n)
-  const wordSegment = word.slice(index + 1, index + 2)
+  const wordSegment = word.slice(index - 1, index + 2)
 
   if (wordSegment.length < 1) return []
 
@@ -26,19 +26,20 @@ const getAdjStyles = (word: number[], n: number) => {
     n > 11 ? -1 : n + 4,
     (n + 1) % 4 === 0 || n > 11 ? -1 : n + 5,
   ]
+  console.log(
+    `position: ${n}\nadjacency: ${adjacent}\nin segment: ${adjacent.map((i) =>
+      wordSegment.includes(i),
+    )}`,
+  )
 
   return adjacent
-    .map((i) => i > 0 && wordSegment.includes(i))
+    .map((i) => wordSegment.includes(i))
     .map((x, i) => {
       if (!x) return null
-      if (i === 0) return "tile_top_left"
-      if (i === 1) return "tile_top"
-      if (i === 2) return "tile_top_right"
-      if (i === 3) return "tile_left"
-      if (i === 4) return "tile_right"
-      if (i === 5) return "tile_bottom_left"
-      if (i === 6) return "tile_bottom"
-      if (i === 7) return "tile_bottom_right"
+      if (i === 4) return "tile__adj--right"
+      if (i === 5) return "tile__adj--bottom-left"
+      if (i === 6) return "tile__adj--bottom"
+      if (i === 7) return "tile__adj--bottom-right"
     })
     .filter((n) => n != null)
 }
@@ -62,10 +63,15 @@ const Cell = ({ isAdjacent, letter, position }: Props) => {
   const removeLetter = gameStore().removeLetter
 
   const adjLineStyles = getAdjStyles(currentWord, position)
+  const selectedState = currentWord.includes(position)
+    ? "selected"
+    : isAdjacent
+    ? "adjacent"
+    : ""
 
   const handleClick = () => {
-    console.log("has letter already", currentWord.includes(position))
     if (!gameStarted) return
+    if (withinTile === wasWithinTile || !withinTile) return
     if (currentWord.length === 0 || isAdjacent) addLetter(position)
     if (currentWord.includes(position)) removeLetter(position)
   }
@@ -85,22 +91,19 @@ const Cell = ({ isAdjacent, letter, position }: Props) => {
   }, [withinTile, wasWithinTile])
 
   return (
-    <div className="gameTile" ref={tileRef}>
+    <div className="tile">
       {adjLineStyles.map((e, i) => (
-        <div key={i} className={e ?? ""} />
+        <div key={i} className={`tile__adj${e ? ` ${e}` : ""}`} />
       ))}
-      <button
-        className={`${
-          currentWord.includes(position)
-            ? "selectedTile"
-            : isAdjacent
-            ? " adjacentTile"
-            : ""
-        }`}
-        onClick={handleClick}
+      <div
+        className="tile__button-container"
+        ref={tileRef}
+        data-selected={selectedState}
       >
-        {letter}
-      </button>
+        <button className="tile__button" onClick={handleClick}>
+          {letter}
+        </button>
+      </div>
     </div>
   )
 }

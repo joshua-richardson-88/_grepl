@@ -14,14 +14,6 @@ const CurrentWord = () => {
   const toggleIncorrect = gameStore().toggleIncorrectWord
   const toggleAlreadyFound = gameStore().toggleAlreadyFound
 
-  const wordString = !gameStarted
-    ? ""
-    : wasIncorrect
-    ? "Not a word"
-    : wasFound
-    ? "Already found!"
-    : tilesToWord(word, tiles)
-
   const updateAnimation = () => {
     setTimeout(() => {
       toggleIncorrect(false)
@@ -35,8 +27,9 @@ const CurrentWord = () => {
 
   return (
     <h2
-      className={`currentWord${wasFound || wasIncorrect ? " warning" : ""}`}
+      className="board__current-word"
       onAnimationEnd={updateAnimation}
+      data-warn={wasFound || wasIncorrect}
     >
       {!gameStarted
         ? ""

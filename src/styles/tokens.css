@@ -1,0 +1,52 @@
+:root {
+  /* color tokens */
+  --clr-primary-100: hsl(219, 73%, 96%);
+  --clr-primary-200: hsl(219, 73%, 90%);
+  --clr-primary-300: hsl(219, 73%, 83%);
+  --clr-primary-400: hsl(219, 73%, 64%);
+  --clr-primary-500: hsl(219, 73%, 45%);
+  --clr-primary-600: hsl(219, 73%, 32%);
+  --clr-primary-700: hsl(219, 73%, 25%);
+  --clr-primary-800: hsl(219, 73%, 15%);
+  --clr-primary-900: hsl(219, 73%, 7%);
+
+  --clr-neutral-100: hsl(0, 0%, 96%);
+  --clr-neutral-200: hsl(0, 0%, 90%);
+  --clr-neutral-300: hsl(0, 0%, 83%);
+  --clr-neutral-400: hsl(0, 0%, 64%);
+  --clr-neutral-500: hsl(0, 0%, 45%);
+  --clr-neutral-600: hsl(0, 0%, 32%);
+  --clr-neutral-700: hsl(0, 0%, 25%);
+  --clr-neutral-800: hsl(0, 0%, 15%);
+  --clr-neutral-900: hsl(0, 0%, 7%);
+
+  --clr-error-400: hsl(0, 91%, 71%);
+  --clr-error-500: hsl(0, 84%, 60%);
+  --clr-error-600: hsl(0, 72%, 51%);
+  --clr-error-700: hsl(0, 74%, 42%);
+  --clr-error-800: hsl(0, 70%, 35%);
+  --clr-error-900: hsl(0, 63%, 31%);
+
+  --clr-warn-400: hsl(38, 92%, 50%);
+  --clr-warn-600: hsl(32, 95%, 44%);
+
+  --clr-slate-100: #f1f5f9;
+  --clr-slate-200: #e2e8f0;
+  --clr-slate-300: #cbd5e1;
+  --clr-slate-400: #94a3b8;
+  --clr-slate-500: #64748b;
+  --clr-slate-600: #475569;
+  --clr-slate-700: #334155;
+  --clr-slate-800: #1e293b;
+  --clr-slate-900: #0f172a;
+
+  /* font-weight tokens */
+  --fw-thin: 100;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+
+  /* font-family tokens */
+  --ff-accent: 'Amatic SC', serif;
+  --ff-base: 'Roboto', sans-serif;
+}

@@ -4,6 +4,11 @@ import { useEffect } from "react"
 import { trpc } from "../utils/trpc"
 
 import "../styles/globals.css"
+import "../styles/play.css"
+import "../styles/profile.css"
+import "../styles/themes.css"
+import "../styles/tokens.css"
+import "../styles/utilities.css"
 
 type ColorMode = "light" | "dark"
 

@@ -25,9 +25,10 @@ const GameButton = () => {
   return (
     <button
       tabIndex={0}
-      className={`gameButton insetShadow${isGameStarted ? "" : "animatePulse"}`}
+      className="board__button board__button--play"
       onClick={clickHandler}
       ref={buttonRef}
+      data-game-running={isGameStarted}
     >
       {isGameStarted ? "End" : "Start"}
     </button>

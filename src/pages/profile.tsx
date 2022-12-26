@@ -21,7 +21,7 @@ const Profile: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="wrapper">
+      <main className="wrapper wrapper--gap">
         {clientOnly && (
           <div className="profile">
             <UserCard />

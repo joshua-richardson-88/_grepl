@@ -4,9 +4,9 @@ const Score = () => {
   const n = gameStore().score
 
   return (
-    <div className="score">
+    <div className="board__score">
       <p>Score</p>
-      <p className="text-large text-center">{n}</p>
+      <p className="board__large-text">{n}</p>
     </div>
   )
 }

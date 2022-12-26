@@ -4,6 +4,7 @@ import gameStore from "./data/store"
 const RotateCWIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
+    className="board__icon"
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth="1.5"
@@ -19,6 +20,7 @@ const RotateCWIcon = () => (
 const RotateCCWIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
+    className="board__icon"
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth="1.5"
@@ -43,9 +45,10 @@ const RotateButton = ({ dir }: ButtonProps) => {
   return (
     <button
       name={`rotate-${dir === "cw" ? "" : "counter-"}clockwise`}
-      className={`rotateButton insetShadow${keyPressed ? " active" : ""}`}
+      className="board__button board__button--tall"
       type="button"
       onClick={() => rotate(dir)}
+      data-pressed={keyPressed}
     >
       {dir === "cw" ? <RotateCWIcon /> : <RotateCCWIcon />}
     </button>
