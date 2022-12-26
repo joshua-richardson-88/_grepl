@@ -30,6 +30,7 @@ const initState: State = {
   heatMap: _heatMap,
   pointer: _pointer,
   score: 0,
+  maxTime: 180,
   tileMap: {},
   tiles: _tiles,
   validationUrl: _url,
@@ -184,6 +185,7 @@ type State = {
   currentWord: number[]
   gameStarted: boolean
   heatMap: HeatMap
+  maxTime: number
   pointer: Position
   score: number
   tiles: string[]

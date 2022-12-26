@@ -11,7 +11,7 @@ const GameBoard = () => {
   return (
     <div className="board">
       <GameButton />
-      <Timer duration={1800} />
+      <Timer />
       <Score />
       <RotateButton dir="cw" />
       <Game />

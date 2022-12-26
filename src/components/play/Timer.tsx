@@ -3,10 +3,10 @@ import { useState, useEffect } from "react"
 import userStore from "../profile/data/store"
 import gameStore from "./data/store"
 
-type Props = { duration: number }
-const Timer = ({ duration }: Props) => {
+const Timer = () => {
   const [t, setT] = useState(-1)
   const isGameStarted = gameStore().gameStarted
+  const duration = gameStore().maxTime
 
   const endGame = gameStore().endGame
   const persistGame = userStore().addGame
