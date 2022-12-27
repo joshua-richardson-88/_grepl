@@ -6,6 +6,7 @@ import ClearButton from "./ClearButton"
 import SubmitButton from "./SubmitButton"
 import Game from "./Gameboard"
 import CurrentWord from "./CurrentWord"
+import Challenge from "./Challenge"
 
 const GameBoard = () => {
   return (
@@ -19,6 +20,7 @@ const GameBoard = () => {
       <RotateButton dir="ccw" />
       <SubmitButton />
       <CurrentWord />
+      <Challenge />
     </div>
   )
 }

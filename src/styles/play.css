@@ -45,6 +45,16 @@
   background-color: var(--clr-clear);
   color: var(--clr-text-primary);
 }
+.board__button--share {
+  background-color: var(--clr-activate);
+  color: var(--clr-text-activate);
+  padding: 0.25rem 0.75rem;
+  box-shadow: none;
+}
+.board__button--share:is(:hover, :focus, :active) {
+  --clr-activate: var(--clr-primary-600);
+  box-shadow: none;
+}
 
 .board__timer {
   grid-column: span 4;
@@ -209,4 +219,15 @@
 .word-list__word {
   padding: 0.25rem 1rem;
   width: fit-content;
+}
+
+.board__share {
+  grid-column: span 6;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+  background-color: var(--clr-alpha);
+  padding: 1rem;
+  border-radius: 0.5rem;
 }

@@ -6,6 +6,7 @@
 
   /* game specific variables */
   --clr-activate: var(--clr-primary-500);
+  --clr-alpha: hsla(0, 0%, 0%, 0.1);
   --clr-btn: var(--clr-primary-200);
   --clr-clear: var(--clr-error-400);
   --clr-clear-on: var(--clr-error-600);
@@ -30,6 +31,7 @@
 
   /* game specific variables */
   --clr-activate: var(--clr-primary-500);
+  --clr-alpha: hsla(0, 0%, 0%, 0.3);
   --clr-btn: var(--clr-neutral-600);
   --clr-clear: var(--clr-error-700);
   --clr-clear-on: var(--clr-error-800);
