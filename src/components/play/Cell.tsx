@@ -17,14 +17,6 @@ const getAdjStyles = (word: number[], n: number) => {
       ? word.slice(index, index + 2)
       : word.slice(index - 1, index + 2)
 
-  console.log(`
-    position: ${n}
-    word: ${word}
-    
-    index in word: ${index}
-    word segment: ${wordSegment}
-  `)
-
   if (wordSegment.length < 1) return []
 
   const adjacent = [
@@ -38,24 +30,16 @@ const getAdjStyles = (word: number[], n: number) => {
     (n + 1) % 4 === 0 || n > 11 ? -1 : n + 5,
   ]
 
-  const inWordSegment = adjacent.map((i) => wordSegment.includes(i))
-  const mapToClass = inWordSegment.map((x, i) => {
-    if (!x) return null
-    if (i === 4) return "tile__adj--right"
-    if (i === 5) return "tile__adj--bottom-left"
-    if (i === 6) return "tile__adj--bottom"
-    if (i === 7) return "tile__adj--bottom-right"
-  })
-  const filtered = mapToClass.filter(Boolean)
-
-  console.log(`
-    adjacent list: ${adjacent}
-    adjacent in word segment: ${inWordSegment}
-    adjacent to css class: ${mapToClass}
-    adjacent filtered: ${filtered}
-  `)
-
-  return filtered
+  return adjacent
+    .map((i) => wordSegment.includes(i))
+    .map((x, i) => {
+      if (!x) return null
+      if (i === 4) return "tile__adj--right"
+      if (i === 5) return "tile__adj--bottom-left"
+      if (i === 6) return "tile__adj--bottom"
+      if (i === 7) return "tile__adj--bottom-right"
+    })
+    .filter(Boolean)
 }
 
 type Props = {
