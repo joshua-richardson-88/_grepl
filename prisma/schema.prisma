@@ -10,12 +10,55 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Example {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
 model Word {
   word String @unique
+}
+
+enum UserRegistrationType {
+  email
+  phone
+}
+
+enum UserTheme {
+  dark
+  light
+  system
+}
+
+model User {
+  id         String               @id @default(cuid())
+  passageId  String               @unique
+  username   String               @unique
+  identifier UserRegistrationType
+  gold       Int                  @default(0)
+  theme      UserTheme            @default(system)
+  games      Game[]
+  followedBy Friends[]            @relation("following")
+  following  Friends[]            @relation("follower")
+}
+
+model Friends {
+  followerId  String
+  followingId String
+  connectedOn DateTime @default(now())
+  follower    User     @relation("follower", fields: [followerId], references: [id])
+  following   User     @relation("following", fields: [followingId], references: [id])
+
+  @@id([followerId, followingId])
+}
+
+enum GameType {
+  soloStandard
+}
+
+model Game {
+  id         String   @id @default(cuid())
+  playedAt   DateTime @default(now())
+  type       GameType
+  board      String
+  words      String[]
+  duration   String?
+  playedWith String[]
+  playedById String
+  playedBy   User     @relation(fields: [playedById], references: [id])
 }
