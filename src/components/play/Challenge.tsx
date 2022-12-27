@@ -30,7 +30,7 @@ const Challenge = () => {
   const shareClick = () => {
     setCopied(true)
     const { protocol, host } = window.location
-    navigator.clipboard.writeText(`${protocol}://${host}/play?game=${tiles}`)
+    navigator.clipboard.writeText(`${protocol}//${host}/play?game=${tiles}`)
     setTiles(_tiles)
   }
 
