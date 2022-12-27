@@ -119,10 +119,11 @@ const gameStore = create<GameStore>()(
           "game/rotateTiles",
         )
       },
-      startGame: () => {
+      startGame: (init) => {
         set(
           (state) => {
-            const _tiles = generateTileset()
+            const _tiles =
+              init == null ? generateTileset() : init.toUpperCase().split("")
             const _tileMap = getMap(_tiles)
 
             state.currentWord = []
@@ -198,7 +199,7 @@ type Actions = {
   endGame: () => void
   removeLetter: (start: number) => void
   rotateTiles: (s: "cw" | "ccw") => void
-  startGame: () => void
+  startGame: (tiles?: string) => void
   toggleAlreadyFound: (f?: boolean) => void
   toggleIncorrectWord: (f?: boolean) => void
   updateTouchPosition: (p: Position) => void

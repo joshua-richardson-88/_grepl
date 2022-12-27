@@ -1,9 +1,11 @@
+import { useRouter } from "next/router"
 import { useRef } from "react"
 
 import userStore from "../profile/data/store"
 import gameStore from "./data/store"
 
 const GameButton = () => {
+  const { query } = useRouter()
   const buttonRef = useRef<HTMLButtonElement>(null)
   const isGameStarted = gameStore().gameStarted
 
@@ -18,7 +20,7 @@ const GameButton = () => {
       persistGame("solo")
       endGame()
     } else {
-      startGame()
+      startGame(typeof query.game === "string" ? query.game : undefined)
     }
   }
 
