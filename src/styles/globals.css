@@ -116,11 +116,7 @@ body {
   background-color: inherit;
 }
 .scrollbar::-webkit-scrollbar-thumb {
-  background-color: #121212;
-  border-radius: 2rem;
-}
-.scrollbar-light::-webkit-scrollbar-thumb {
-  background-color: rgba(115, 115, 115, 0.5);
+  background-color: var(---clr-bg);
   border-radius: 2rem;
 }
 /******************************************************************************

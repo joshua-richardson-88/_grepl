@@ -55,7 +55,7 @@ const Play: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="wrapper wrapper--gap">
+      <main className="wrapper wrapper--gap scrollbar">
         <GameBoard />
         <WordList />
       </main>
