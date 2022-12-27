@@ -5,7 +5,7 @@ import userStore from "../profile/data/store"
 import gameStore from "./data/store"
 
 const GameButton = () => {
-  const { query } = useRouter()
+  const router = useRouter()
   const buttonRef = useRef<HTMLButtonElement>(null)
   const isGameStarted = gameStore().gameStarted
 
@@ -15,12 +15,15 @@ const GameButton = () => {
   const persistGame = userStore().addGame
 
   const clickHandler = () => {
+    const gameParam =
+      typeof router?.query?.game === "string" ? router?.query?.game : undefined
     buttonRef.current?.blur()
     if (isGameStarted) {
       persistGame("solo")
       endGame()
     } else {
-      startGame(typeof query.game === "string" ? query.game : undefined)
+      startGame(gameParam)
+      router.replace("/play", undefined, { shallow: true })
     }
   }
 
