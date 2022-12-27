@@ -7,6 +7,20 @@ import { immer } from "zustand/middleware/immer"
 import gameStore from "../../play/data/store"
 import { type HeatMap } from "../../play/data/utils"
 
+let gameState: GameState = {
+  tiles: [],
+  words: [],
+  heatMap: { max: 0 },
+}
+
+const sub = gameStore.subscribe((state) => {
+  gameState = {
+    tiles: state.tiles,
+    words: state.wordList,
+    heatMap: state.heatMap,
+  }
+})
+
 const nanoid = customAlphabet(nolookalikesSafe, 12)
 const initState: State = {
   games: [],
@@ -19,7 +33,8 @@ const userStore = create(
   persist(
     immer<UserStore>((set) => ({
       ...initState,
-      addGame: (type, tiles, words, heatMap) => {
+      addGame: (type) => {
+        const { tiles, words, heatMap } = gameState
         set((state) => {
           state.games = [
             { type, date: Date.now(), tiles, words, heatMap },
@@ -47,6 +62,11 @@ const userStore = create(
 
 export default userStore
 export type GameType = "solo" | "multi"
+type GameState = {
+  tiles: string[]
+  words: string[]
+  heatMap: HeatMap
+}
 export type Game = {
   type: GameType
   date: number
@@ -63,12 +83,7 @@ type State = {
   username: string
 }
 type Actions = {
-  addGame: (
-    type: GameType,
-    tiles: string[],
-    words: string[],
-    heatMap: HeatMap,
-  ) => void
+  addGame: (type: GameType) => void
   clearProfile: () => void
   setTheme: (t: ThemeType) => void
   updateUsername: (s?: string) => void

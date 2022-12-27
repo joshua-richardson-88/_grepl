@@ -18,9 +18,8 @@ const Timer = () => {
     }
     if (isGameStarted && t === -1) setT(duration)
     if (t === 0) {
-      endGame()
-
       persistGame("solo")
+      endGame()
       setT(-1)
       return
     }
